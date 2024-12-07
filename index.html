@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Today's Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f8ff;
+            color: #333;
+        }
+        h1 {
+            color: #00509e;
+        }
+        .info {
+            margin: 15px 0;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Today's Information</h1>
+    <div class="info" id="date"></div>
+    <div class="info" id="time"></div>
+    <div class="info" id="dayOfWeek"></div>
+    <div class="info" id="year"></div>
+    <div class="info" id="timezone"></div>
+
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+
+            // Get date components
+            const day = now.getDate();
+            const month = now.toLocaleString('default', { month: 'long' });
+            const year = now.getFullYear();
+
+            // Get time components
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+
+            // Get day of the week
+            const dayOfWeek = now.toLocaleString('default', { weekday: 'long' });
+
+            // Get timezone
+            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+            // Display information
+            document.getElementById('date').textContent = `Date: ${day} ${month} ${year}`;
+            document.getElementById('time').textContent = `Time: ${hours}:${minutes}:${seconds}`;
+            document.getElementById('dayOfWeek').textContent = `Day: ${dayOfWeek}`;
+            document.getElementById('year').textContent = `Year: ${year}`;
+            document.getElementById('timezone').textContent = `Timezone: ${timezone}`;
+        }
+
+        // Update every second
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+    </script>
+</body>
+</html>
