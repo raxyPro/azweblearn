@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Today's Information</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RayGrow Pvt Limited</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,20 +22,15 @@
         }
     </style>
 </head>
-
 <body>
     <h1>Today's Information</h1>
     <div class="info" id="date"></div>
     <div class="info" id="time"></div>
     <div class="info" id="dayOfWeek"></div>
-    <div class="info" id="year"></div>
-    <div class="info" id="timezone"></div>
+    <div class="info" id="indiaTime"></div>
     <div class="info" id="dubaiTime"></div>
+    <div class="info" id="canadaTime"></div>
     <div class="info" id="australiaTime"></div>
-    <div class="info" id="usTime"></div>
-    <div class="info" id="canadaTime"></div>   
-
-
 
     <script>
         function getTimeInZone(timeZone) {
@@ -46,7 +42,8 @@
                 hour12: false
             };
             return new Intl.DateTimeFormat('en-US', options).format(new Date());
-        }        
+        }
+
         function updateDateTime() {
             const now = new Date();
 
@@ -63,34 +60,19 @@
             // Get day of the week
             const dayOfWeek = now.toLocaleString('default', { weekday: 'long' });
 
-            // Get timezone
-            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
             // Display information
             document.getElementById('date').textContent = `Date: ${day} ${month} ${year}`;
             document.getElementById('time').textContent = `Time: ${hours}:${minutes}:${seconds}`;
             document.getElementById('dayOfWeek').textContent = `Day: ${dayOfWeek}`;
-            document.getElementById('year').textContent = `Year: ${year}`;
-            document.getElementById('timezone').textContent = `Timezone: ${timezone}`;
-//          modified by rampal
-            const dubaiTime = getTimeInZone('Asia/Dubai');
-            const australiaTime = getTimeInZone('Australia/Sydney');
-            const usTime = getTimeInZone('America/New_York');
-            const canadaTime = getTimeInZone('America/Toronto');
-
-            document.getElementById('dubaiTime').textContent = `Dubai Time: ${dubaiTime}`;
-            document.getElementById('australiaTime').textContent = `Australia Time: ${australiaTime}`;
-            document.getElementById('usTime').textContent = `United States Time (New York): ${usTime}`;
-            document.getElementById('canadaTime').textContent = `Canada Time (Toronto): ${canadaTime}`;
-
-
+            document.getElementById('indiaTime').textContent = `India Time: ${getTimeInZone('Asia/Kolkata')}`;
+            document.getElementById('dubaiTime').textContent = `Dubai Time: ${getTimeInZone('Asia/Dubai')}`;
+            document.getElementById('canadaTime').textContent = `Canada Time (Toronto): ${getTimeInZone('America/Toronto')}`;
+            document.getElementById('australiaTime').textContent = `Australia Time (Sydney): ${getTimeInZone('Australia/Sydney')}`;
         }
 
         // Update every second
         setInterval(updateDateTime, 1000);
         updateDateTime();
     </script>
-    <div>Adding Changed in Ram branch</div>
-    <div>Adding Changed in Ram branch-2</div>
 </body>
 </html>
